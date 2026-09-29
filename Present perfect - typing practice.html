@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Escribe el presente perfecto – Present perfect typing practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf6e9;--ink:#14205a;--card:#fff;--line:#14205a;--accent:#e4572e;--sun:#f2b632;--muted:#4c5788;--chip:#e9efff;--good:#2f8f4e;--bad:#c53b3b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1533;--ink:#f6f1e0;--card:#18224d;--line:#f6f1e0;--accent:#ff8a63;--sun:#f2b632;--muted:#aab4e6;--chip:#243069;--good:#5fd487;--bad:#ff8080}}
+:root[data-theme="dark"]{--bg:#0e1533;--ink:#f6f1e0;--card:#18224d;--line:#f6f1e0;--accent:#ff8a63;--sun:#f2b632;--muted:#aab4e6;--chip:#243069;--good:#5fd487;--bad:#ff8080}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+main{max-width:1000px;margin:0 auto;padding:clamp(12px,2.5vw,32px);display:flex;flex-direction:column;gap:clamp(14px,2.5vw,26px)}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{margin:0;font-size:clamp(1.4rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.score{font-weight:800;font-size:clamp(1rem,2vw,1.4rem);background:var(--chip);border-radius:999px;padding:.4em 1em}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font:inherit;font-weight:700;font-size:clamp(.9rem,1.8vw,1.2rem);padding:.35em 1em;border:3px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.card{background:var(--card);border:3px solid var(--line);border-radius:26px;padding:clamp(18px,3vw,36px);box-shadow:8px 8px 0 var(--sun);display:flex;flex-direction:column;gap:clamp(12px,2vw,20px)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;font-weight:700;font-size:clamp(.9rem,1.6vw,1.15rem);color:var(--muted)}
+.meta b{color:var(--ink)}
+.sentence{font-size:clamp(1.2rem,3.1vw,2.05rem);font-weight:800;line-height:1.5}
+.blankwrap{display:inline-flex;align-items:baseline;gap:.2em}
+.blank{font:inherit;font-weight:800;font-size:1em;border:none;border-bottom:4px solid var(--line);background:transparent;color:var(--accent);padding:.05em .1em;text-align:center}
+.blank.h{width:clamp(4em,16vw,6em)}
+.blank.p{width:clamp(6em,22vw,9em)}
+.blank:focus{outline:none;border-color:var(--accent)}
+.blank.correct{color:var(--good);border-color:var(--good)}
+.blank.wrong{color:var(--bad);border-color:var(--bad)}
+.lbl{font-weight:500;color:var(--muted);font-size:.5em}
+.feedback{min-height:2.2em;font-weight:800;font-size:clamp(1rem,2.2vw,1.4rem)}
+.feedback.good{color:var(--good)}
+.feedback.bad{color:var(--bad)}
+.accents{display:flex;flex-wrap:wrap;gap:8px}
+.accents button{font:inherit;font-weight:800;font-size:clamp(1rem,2vw,1.3rem);width:2.4em;height:2.4em;border-radius:12px;border:3px solid var(--line);background:var(--chip);color:var(--ink);cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.actions button{font:inherit;font-weight:800;font-size:clamp(1rem,2vw,1.4rem);padding:.6em 1.3em;border-radius:16px;border:3px solid var(--line);cursor:pointer;background:var(--card);color:var(--ink)}
+.actions .go{background:var(--accent);color:#fff;border-color:var(--accent)}
+button:focus-visible,.blank:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
+.tip{margin:0;color:var(--muted);font-size:clamp(.85rem,1.5vw,1.05rem)}
+[hidden]{display:none!important}
+@media (max-width:600px){.sentence{font-size:clamp(1.05rem,4.6vw,1.5rem)}.blank.h{width:clamp(3.5em,20vw,5em)}.blank.p{width:clamp(5em,34vw,7.5em)}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Escribe el presente perfecto</h1>
+  <div class="score" id="score">0 / 0</div>
+</header>
+
+<div class="chips" role="group" aria-label="Participle type">
+  <button class="chip" data-c="all" aria-pressed="true">Todos</button>
+  <button class="chip" data-c="reg" aria-pressed="false">Participios regulares</button>
+  <button class="chip" data-c="acc" aria-pressed="false">Necesitan acento (leer, oír...)</button>
+  <button class="chip" data-c="irr" aria-pressed="false">Participios irregulares</button>
+</div>
+
+<div class="card">
+  <div class="meta">Verbo: <b id="infShown"></b> <span id="typeShown"></span></div>
+  <div class="sentence" id="sentence"></div>
+  <div class="accents" id="accents" role="group" aria-label="Insert accent"></div>
+  <div class="feedback" id="feedback"></div>
+</div>
+
+<div class="actions">
+  <button class="go" id="check">Revisar (Enter)</button>
+  <button id="next">Siguiente (Space)</button>
+  <button id="reveal">Mostrar respuesta</button>
+</div>
+<p class="tip">Two blanks: first <b>haber</b> (he, has, ha, hemos, habéis, han), then the <b>participio pasado</b>. Accents count. Tap a letter below to insert it into whichever box you're typing in.</p>
+</main>
+
+<script>
+const $=id=>document.getElementById(id), pick=a=>a[Math.floor(Math.random()*a.length)];
+const REG=[["hablar","to speak"],["caminar","to walk"],["estudiar","to study"],["bailar","to dance"],["trabajar","to work"],["cocinar","to cook"],["llegar","to arrive"],["comer","to eat"],["beber","to drink"],["correr","to run"],["aprender","to learn"],["vender","to sell"],["vivir","to live"],["compartir","to share"],["decidir","to decide"],["salir","to go out"]];
+const ACC=[["leer","to read"],["oír","to hear"],["traer","to bring"],["creer","to believe"],["caer","to fall"],["reír","to laugh"]];
+const IRR=[["hacer","to do / make","hecho"],["decir","to say","dicho"],["escribir","to write","escrito"],["ver","to see","visto"],["poner","to put","puesto"],["volver","to return","vuelto"],["morir","to die","muerto"],["romper","to break","roto"],["cubrir","to cover","cubierto"],["abrir","to open","abierto"],["descubrir","to discover","descubierto"],["resolver","to solve","resuelto"],["devolver","to return (sthg)","devuelto"]];
+const SUBJ=[["yo","he",0],["tú","has",1],["él","ha",2],["ella","ha",2],["usted","ha",2],["mi hermano","ha",2],["nosotros","hemos",3],["nosotras","hemos",3],["mi familia y yo","hemos",3],["ellos","han",5],["ellas","han",5],["ustedes","han",5],["mis padres","han",5],["los estudiantes","han",5]];
+const REFL=["me","te","se","nos","os","se"];
+const TAIL={
+ hablar:s=>`${s} ____ ____ por teléfono toda la tarde.`, caminar:s=>`${s} ____ ____ diez kilómetros hoy.`, estudiar:s=>`${s} ____ ____ mucho esta semana.`, bailar:s=>`${s} ____ ____ toda la noche.`,
+ trabajar:s=>`${s} ____ ____ en ese proyecto todo el mes.`, cocinar:s=>`${s} ____ ____ para la fiesta.`, llegar:s=>`${s} ____ ____ tarde otra vez.`,
+ comer:s=>`${s} ____ ____ toda la pizza.`, beber:s=>`${s} ____ ____ tres botellas de agua.`, correr:s=>`${s} ____ ____ cinco millas hoy.`, aprender:s=>`${s} ____ ____ mucho vocabulario nuevo.`, vender:s=>`${s} ____ ____ su coche viejo.`,
+ vivir:s=>`${s} ____ ____ en esta ciudad por diez años.`, compartir:s=>`${s} ____ ____ la noticia con todos.`, decidir:s=>`${s} ____ ____ ir al concierto.`, salir:s=>`${s} ____ ____ tres veces esta semana.`,
+ leer:s=>`${s} ____ ____ dos novelas este mes.`, oír:s=>`${s} ____ ____ un ruido extraño.`, traer:s=>`${s} ____ ____ los libros a clase.`, creer:s=>`${s} nunca ____ ____ esa excusa.`, caer:(s,p)=>`${s} ${REFL[p]} ____ ____ en la nieve.`, reír:(s,p)=>`${s} ${REFL[p]} ____ ____ mucho con esa película.`,
+ hacer:s=>`${s} ____ ____ toda la tarea.`, decir:s=>`${s} ____ ____ la verdad.`, escribir:s=>`${s} ____ ____ tres cartas.`, ver:s=>`${s} ____ ____ esa película dos veces.`, poner:s=>`${s} ____ ____ la mesa ya.`, volver:s=>`${s} ____ ____ tarde del trabajo.`,
+ morir:s=>`La planta se ____ ____ por falta de agua.`, romper:s=>`${s} ____ ____ el teléfono.`, cubrir:s=>`${s} ____ ____ el pastel con chocolate.`, abrir:s=>`${s} ____ ____ todas las ventanas.`, descubrir:s=>`${s} ____ ____ un café nuevo.`, resolver:s=>`${s} ____ ____ el problema.`, devolver:s=>`${s} ____ ____ el libro a la biblioteca.`
+};
+function partForm(type,item){
+  const i=item[0], end=i.slice(-2);
+  if(type==="acc")return i.slice(0,-2)+"ído";
+  return i.slice(0,-2)+(end==="ar"?"ado":"ido");
+}
+const CL={reg:"Participio regular",acc:"Necesita acento",irr:"Participio irregular"};
+let cat="all",correct=0,total=0,s={},checked=false;
+function makeItem(){
+  const which=cat==="all"?pick(["reg","acc","irr"]):cat;
+  const src=which==="reg"?REG:which==="acc"?ACC:IRR;
+  const item=pick(src);
+  const part=which==="irr"?item[2]:partForm(which,item);
+  return {i:item[0],e:item[1],part,c:which};
+}
+function deal(){
+  s.v=makeItem();
+  const sub=pick(SUBJ); s.subjTxt=sub[0]; s.hAns=sub[1];
+  const tail=TAIL[s.v.i](sub[0],sub[2]);
+  const [pre,mid,post]=tail.split("____");
+  s.pre=pre; s.mid=mid; s.post=post;
+  render();
+}
+function render(){
+  $("infShown").textContent=s.v.i; $("typeShown").textContent="· "+CL[s.v.c]+" · "+s.v.e;
+  $("sentence").innerHTML=`${s.pre}<span class="blankwrap"><input class="blank h" id="blankH" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="conjugate haber"></span>${s.mid}<span class="blankwrap"><input class="blank p" id="blankP" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="past participle"></span>${s.post}`;
+  $("feedback").className="feedback"; $("feedback").textContent="";
+  checked=false;
+  ["blankH","blankP"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}}));
+  $("blankH").focus();
+}
+function check(){
+  const bh=$("blankH"), bp=$("blankP");
+  if(!bh.value.trim()||!bp.value.trim())return;
+  if(checked){deal();return}
+  checked=true; total++;
+  const okH=bh.value.toLowerCase().trim()===s.hAns;
+  const okP=bp.value.toLowerCase().trim()===s.v.part;
+  bh.classList.add(okH?"correct":"wrong"); bp.classList.add(okP?"correct":"wrong");
+  if(okH&&okP){correct++;$("feedback").className="feedback good";$("feedback").textContent="¡Correcto! ✔";}
+  else{$("feedback").className="feedback bad";$("feedback").textContent=`Casi — la forma correcta es "${s.hAns} ${s.v.part}".`;}
+  $("score").textContent=`${correct} / ${total}`;
+  bh.disabled=true; bp.disabled=true;
+}
+function reveal(){
+  const bh=$("blankH"), bp=$("blankP");
+  bh.value=s.hAns; bp.value=s.v.part;
+  bh.classList.remove("wrong"); bp.classList.remove("wrong");
+  bh.classList.add("correct"); bp.classList.add("correct");
+  $("feedback").className="feedback good"; $("feedback").textContent=`Respuesta: "${s.hAns} ${s.v.part}"`;
+  bh.disabled=true; bp.disabled=true; checked=true;
+}
+function buildAccents(){
+  const letters=["á","é","í","ó","ú","ñ","ü"];
+  $("accents").innerHTML=letters.map(c=>`<button type="button" data-c="${c}">${c}</button>`).join("");
+  $("accents").querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    const active=document.activeElement;
+    const box=(active&&active.classList&&active.classList.contains("blank"))?active:$("blankP");
+    if(box.disabled)return;
+    const start=box.selectionStart??box.value.length, end=box.selectionEnd??box.value.length;
+    box.value=box.value.slice(0,start)+b.dataset.c+box.value.slice(end);
+    box.focus(); box.setSelectionRange(start+1,start+1);
+  });
+}
+document.querySelectorAll(".chip[data-c]").forEach(b=>b.onclick=()=>{cat=b.dataset.c;document.querySelectorAll(".chip[data-c]").forEach(x=>x.setAttribute("aria-pressed",x===b));deal()});
+$("check").onclick=check; $("next").onclick=deal; $("reveal").onclick=reveal;
+document.addEventListener("keydown",e=>{if(e.code==="Space"&&!(e.target.classList&&e.target.classList.contains("blank"))){e.preventDefault();deal()}});
+buildAccents();
+deal();
+</script>
+</body>
+</html>
