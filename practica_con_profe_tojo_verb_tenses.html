@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verb Tense Practice | Profe. Tojo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1f3a;--navy2:#173a67;--blue:#245f9c;--orange:#f28c28;--yellow:#ffd85a;--cream:#fff9ed;--white:#fff;--ink:#18283a;--muted:#66788c;--green:#5fa878;--greenbg:#e5f5ea;--red:#cf6254;--redbg:#fde9e5;--panel:#f4f7fb;--shadow:0 16px 38px rgba(14,39,70,.13)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif;background:#edf2f7;color:var(--ink)}body{display:flex}
+.sidebar{width:315px;min-height:100vh;background:linear-gradient(180deg,var(--navy2),var(--navy));color:#fff;padding:26px 18px;position:sticky;top:0;height:100vh;overflow:auto;border-right:5px solid var(--orange)}
+.teacher{font-family:Pacifico,cursive;font-size:2rem;line-height:1.3;color:var(--yellow);text-align:center;margin:4px 0 8px}.sideSub{text-align:center;color:#cbd8e8;font-size:.9rem;margin-bottom:24px}
+.groupLabel{color:var(--yellow);text-transform:uppercase;font-weight:900;font-size:.71rem;letter-spacing:1.3px;margin:20px 8px 8px}.tenseBtn{width:100%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;text-align:left;padding:11px 12px;border-radius:11px;margin:4px 0;cursor:pointer;font-weight:700;font-size:.88rem;transition:.15s}.tenseBtn:hover{background:rgba(255,216,90,.13);border-color:rgba(255,216,90,.5)}.tenseBtn.active{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}
+.main{flex:1;min-width:0}.topbar{background:#fff;border-bottom:1px solid #dde4ec;padding:26px 4vw 22px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}.topbar h1{margin:0;color:var(--navy);font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-1.5px}.modePill{background:var(--cream);color:var(--orange);font-weight:900;padding:10px 15px;border-radius:999px;border:1px solid #f3dfb7}
+.content{padding:34px 4vw 60px;max-width:1250px;margin:auto}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin:22px 0}.statCard{background:#fff;border:1px solid #e0e6ed;border-radius:15px;padding:13px 16px;box-shadow:0 5px 14px rgba(14,39,70,.05);font-weight:800;color:var(--navy)}
+.practiceCard{background:#fff;border-radius:25px;box-shadow:var(--shadow);overflow:hidden;border:1px solid #e3e9ef}.cardHead{background:linear-gradient(135deg,var(--navy2),var(--blue));color:#fff;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.cardHead h2{margin:0;font-size:clamp(1.5rem,3vw,2.35rem)}.counter{background:rgba(255,255,255,.12);padding:8px 12px;border-radius:999px;font-weight:800}
+.promptArea{padding:32px 30px}.instruction{color:var(--muted);font-size:.95rem;font-weight:700;margin-bottom:13px}.sentence{font-size:clamp(1.65rem,3vw,2.45rem);line-height:1.5;font-weight:800;color:var(--navy);margin:7px 0 8px}.verbHint{display:inline-block;background:var(--cream);color:#92551b;border:1px solid #f4d7a0;border-radius:999px;padding:7px 12px;font-weight:800;font-size:.94rem;margin:8px 0 24px}
+.answerRow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.answerInput{flex:1;min-width:220px;border:2px solid #ccd7e2;border-radius:14px;padding:15px 16px;font-size:1.25rem;font-weight:700;outline:none}.answerInput:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(36,95,156,.09)}
+.btn{border:none;border-radius:13px;padding:14px 17px;font-weight:900;font-size:.98rem;cursor:pointer;transition:.15s}.btn:hover{transform:translateY(-1px)}.check{background:var(--orange);color:#fff}.reveal{background:var(--yellow);color:var(--navy)}.next{background:var(--navy);color:#fff}
+.feedback{margin-top:18px;padding:14px 16px;border-radius:14px;font-weight:800;display:none;line-height:1.45}.feedback.good{display:block;background:var(--greenbg);color:#356947;border:1px solid #acd6b9}.feedback.bad{display:block;background:var(--redbg);color:#934a40;border:1px solid #efb6ae}.feedback.near{display:block;background:#fff7d6;color:#806514;border:1px solid #eedb87}
+.review{display:none;border-top:1px solid #e5eaf0;background:var(--panel);padding:26px 30px}.review.show{display:block}.reviewGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.noteBox{background:#fff;border-radius:16px;padding:20px;border:1px solid #e0e6ed}.noteBox h3{margin:0 0 10px;color:var(--navy);font-size:1.08rem}.noteBox p{margin:0;line-height:1.65;color:#4f6275}.noteBox ul{margin:8px 0 0;padding-left:20px;color:#4f6275;line-height:1.6}.pattern{font-weight:900;color:var(--orange)}.smallNote{color:var(--muted);font-size:.87rem;margin-top:12px}
+@media(max-width:950px){body{display:block}.sidebar{width:100%;height:auto;min-height:0;position:relative;border-right:0;border-bottom:5px solid var(--orange)}.teacher{text-align:left}.sideSub{text-align:left;margin-bottom:12px}.tenseList{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}.groupLabel{grid-column:1/-1}.reviewGrid{grid-template-columns:1fr}}
+@media(max-width:560px){.tenseList{grid-template-columns:1fr}.promptArea,.review{padding:22px 18px}.answerRow{align-items:stretch}.btn{width:100%}}
+
+.inlineAnswer{display:inline-block;width:min(300px,46vw);min-width:155px;border:none;border-bottom:4px solid var(--orange);background:#fff8df;color:var(--navy);font:inherit;font-size:.88em;font-weight:900;padding:3px 9px 2px;margin:0 7px;text-align:center;outline:none;border-radius:8px 8px 3px 3px;vertical-align:baseline}
+.inlineAnswer:focus{background:#fff1b8;box-shadow:0 0 0 4px rgba(242,140,40,.10)}
+.conjTitle{font-weight:900;color:var(--navy);margin:0 0 10px}
+.conjTable{width:100%;border-collapse:collapse;font-size:.95rem}
+.conjTable td{padding:9px 10px;border-bottom:1px solid #e4e9ef}
+.conjTable td:first-child{font-weight:800;color:#5c6f82;width:36%}
+.conjTable td:last-child{font-weight:900;color:var(--orange)}
+
+</style>
+</head>
+<body>
+<aside class="sidebar"><div class="teacher">Practica con Profe. Tojo</div><div class="sideSub">Elige un tiempo verbal y completa la frase.</div><div class="tenseList" id="tenseList"></div></aside>
+<div class="main"><header class="topbar"><h1>Verb Tense Practice</h1><div class="modePill" id="modePill">Present Tense</div></header><main class="content">
+<div class="toolbar"><div class="statCard">✅ Correctas: <span id="correctCount">0</span></div><div class="statCard">🎯 Intentos: <span id="attemptCount">0</span></div><button class="btn next" onclick="newQuestion()">🎲 Otra pregunta</button></div>
+<section class="practiceCard"><div class="cardHead"><h2 id="tenseTitle">Present Tense</h2><div class="counter" id="questionCounter">Pregunta</div></div>
+<div class="promptArea"><div class="instruction">Completa la oración con la forma correcta del verbo.</div><div class="sentence" id="sentence"></div><div class="verbHint" id="verbHint"></div>
+<div class="answerRow"><button class="btn check" onclick="checkAnswer()">Comprobar</button><button class="btn reveal" onclick="revealAnswer()">Mostrar respuesta</button></div>
+<div class="feedback" id="feedback"></div><div class="smallNote">Los acentos cuentan. Si la forma es correcta pero falta un acento, recibirás una pista.</div></div>
+<div class="review" id="review"><div class="reviewGrid"><div class="noteBox"><h3>🔍 ¿Por qué?</h3><p id="itemNote"></p></div><div class="noteBox"><h3>📚 Repaso del tiempo verbal</h3><div id="tenseNote"></div></div><div class="noteBox" style="grid-column:1/-1"><h3>🧩 Conjugación completa del verbo</h3><div id="fullConjugation"></div></div></div></div>
+</section></main></div>
+<script>
+const labels={present:"Present Tense",presentProgressive:"Present Progressive",preterite:"Preterite",imperfect:"Imperfect",pastProgressive:"Past Progressive",future:"Future",conditional:"Conditional",presentPerfect:"Present Perfect",pluperfect:"Pluscuamperfecto",futurePerfect:"Future Perfect",conditionalPerfect:"Conditional Perfect",presentSubjunctive:"Present Subjunctive",presentPerfectSubjunctive:"Present Perfect Subjunctive",imperfectSubjunctive:"Imperfect Subjunctive",pastPerfectSubjunctive:"Past Perfect Subjunctive",affirmativeTu:"Affirmative Tú Commands",negativeTu:"Negative Tú Commands",udUds:"Ud. and Uds. Commands",vosotros:"Vosotros Commands"};
+const groups=[["Indicative / Indicativo",["present","presentProgressive","preterite","imperfect","pastProgressive","future","conditional"]],["Perfect Tenses / Tiempos perfectos",["presentPerfect","pluperfect","futurePerfect","conditionalPerfect"]],["Subjunctive / Subjuntivo",["presentSubjunctive","presentPerfectSubjunctive","imperfectSubjunctive","pastPerfectSubjunctive"]],["Commands / Mandatos",["affirmativeTu","negativeTu","udUds","vosotros"]]];
+const tenseNotes={
+present:`<p><span class="pattern">Uso:</span> hábitos, hechos, opiniones y estados presentes.</p><ul><li>-AR: o, as, a, amos, áis, an</li><li>-ER: o, es, e, emos, éis, en</li><li>-IR: o, es, e, imos, ís, en</li><li>Repasa ser, ir, estar, tener, venir, decir, hacer, poner, salir, saber, conocer, oír, traer, dar, ver y los cambios radicales.</li></ul>`,
+presentProgressive:`<p><span class="pattern">Forma:</span> estar + gerundio.</p><ul><li>-AR → -ando</li><li>-ER/-IR → -iendo</li><li>Irregulares frecuentes: leyendo, oyendo, yendo, durmiendo, pidiendo, diciendo, sirviendo, viniendo.</li></ul>`,
+preterite:`<p><span class="pattern">Uso:</span> acciones terminadas en un momento definido.</p><ul><li>-AR: é, aste, ó, amos, asteis, aron</li><li>-ER/-IR: í, iste, ió, imos, isteis, ieron</li><li>Raíces fuertes: tuv-, estuv-, pud-, pus-, sup-, quis-, vin-, hic-, dij-, traj-.</li><li>ser/ir: fui, fuiste, fue, fuimos, fuisteis, fueron.</li></ul>`,
+imperfect:`<p><span class="pattern">Uso:</span> hábitos, descripciones, edad, hora, clima y acciones en progreso en el pasado.</p><ul><li>-AR: aba, abas, aba, ábamos, abais, aban</li><li>-ER/-IR: ía, ías, ía, íamos, íais, ían</li><li>Solo tres irregulares: ser → era; ir → iba; ver → veía.</li></ul>`,
+pastProgressive:`<p><span class="pattern">Forma:</span> imperfecto de estar + gerundio.</p><ul><li>estaba, estabas, estaba, estábamos, estabais, estaban</li><li>Describe una acción que estaba ocurriendo en un momento del pasado.</li></ul>`,
+future:`<p><span class="pattern">Forma:</span> infinitivo + é, ás, á, emos, éis, án.</p><ul><li>Raíces irregulares: tendr-, vendr-, dir-, har-, podr-, pondr-, saldr-, sabr-, querr-, cabr-, habr-.</li></ul>`,
+conditional:`<p><span class="pattern">Forma:</span> infinitivo + ía, ías, ía, íamos, íais, ían.</p><ul><li>Usa las mismas raíces irregulares que el futuro.</li><li>Expresa hipótesis, resultados potenciales y peticiones corteses.</li></ul>`,
+presentPerfect:`<p><span class="pattern">Forma:</span> presente de haber + participio.</p><ul><li>he, has, ha, hemos, habéis, han</li><li>Irregulares: hecho, dicho, visto, puesto, vuelto, escrito, abierto, roto, muerto, cubierto, resuelto.</li></ul>`,
+pluperfect:`<p><span class="pattern">Forma:</span> imperfecto de haber + participio.</p><ul><li>había, habías, había, habíamos, habíais, habían</li><li>Acción que ya había ocurrido antes de otra acción pasada.</li></ul>`,
+futurePerfect:`<p><span class="pattern">Forma:</span> futuro de haber + participio.</p><ul><li>habré, habrás, habrá, habremos, habréis, habrán</li><li>Algo que habrá ocurrido antes de un punto futuro.</li></ul>`,
+conditionalPerfect:`<p><span class="pattern">Forma:</span> condicional de haber + participio.</p><ul><li>habría, habrías, habría, habríamos, habríais, habrían</li><li>Lo que habría ocurrido bajo otras condiciones.</li></ul>`,
+presentSubjunctive:`<p><span class="pattern">Formación:</span> yo del presente → quita -o → terminaciones opuestas.</p><ul><li>-AR: e, es, e, emos, éis, en</li><li>-ER/-IR: a, as, a, amos, áis, an</li><li>Irregulares: sea, vaya, esté, dé, sepa, haya.</li><li>Deseo, emoción, duda, negación, recomendación, expresiones impersonales y antecedentes no específicos.</li></ul>`,
+presentPerfectSubjunctive:`<p><span class="pattern">Forma:</span> haya, hayas, haya, hayamos, hayáis, hayan + participio.</p><ul><li>Acción ya completada vinculada a una expresión que exige subjuntivo.</li></ul>`,
+imperfectSubjunctive:`<p><span class="pattern">Formación:</span> ellos del pretérito → quita -ron → -ra, -ras, -ra, -ramos, -rais, -ran.</p><ul><li>tuvieron → tuviera; dijeron → dijera; fueron → fuera</li><li>Frecuente después de una principal en pasado y en cláusulas con si hipotético.</li></ul>`,
+pastPerfectSubjunctive:`<p><span class="pattern">Forma:</span> hubiera/hubiese + participio.</p><ul><li>Acción anterior a otra situación pasada o hipotética.</li><li>Muy frecuente en si + hubiera..., habría...</li></ul>`,
+affirmativeTu:`<p><span class="pattern">Regla:</span> normalmente la forma de él/ella/usted del presente.</p><ul><li>Irregulares: di, haz, ve, pon, sal, sé, ten, ven.</li><li>Pronombres al final: dímelo, siéntate, escríbelo.</li></ul>`,
+negativeTu:`<p><span class="pattern">Regla:</span> no + presente de subjuntivo de tú.</p><ul><li>No hables, no comas, no vivas.</li><li>Irregulares: no seas, no vayas, no estés, no des, no sepas.</li></ul>`,
+udUds:`<p><span class="pattern">Regla:</span> presente de subjuntivo de usted/ustedes.</p><ul><li>hable/hablen; coma/coman; viva/vivan</li><li>Pronombres al final en afirmativo y delante en negativo.</li></ul>`,
+vosotros:`<p><span class="pattern">Afirmativo:</span> infinitivo sin -r + d.</p><ul><li>hablad, comed, escribid</li><li>Reflexivos normalmente pierden la d: sentaos, levantaos.</li><li>Negativo: no + subjuntivo de vosotros.</li></ul>`};
+const Q={
+present:[
+["Todos los días, Elena ___ el autobús a las siete.","tomar","toma","Elena = tercera persona singular; tomar es regular → toma."],
+["Mis amigos y yo ___ español durante el almuerzo.","hablar","hablamos","Nosotros + -ar → hablamos."],
+["¿Tú ___ café por la mañana?","beber","bebes","Tú + -er → bebes."],
+["Yo ___ la verdad aunque sea difícil.","decir","digo","Decir tiene yo irregular: digo."],
+["Mi hermana ___ veinte años.","tener","tiene","Tener cambia e→ie en ella: tiene."],
+["Nosotros ___ al gimnasio después de clase.","ir","vamos","Ir es irregular: nosotros → vamos."],
+["Yo ___ a la profesora de historia desde hace años.","conocer","conozco","Conocer tiene yo irregular en -zco: conozco."],
+["Mi abuelo siempre ___ las noticias por la radio.","oír","oye","Oír: él → oye."],
+["Yo ___ mi mochila junto a la puerta.","poner","pongo","Poner tiene yo irregular: pongo."],
+["Los niños ___ ocho horas casi todas las noches.","dormir","duermen","Dormir cambia o→ue: ellos → duermen."],
+["¿Vosotros ___ venir con nosotros?","poder","podéis","Poder no cambia la raíz en vosotros: podéis."],
+["Ella ___ muy bien el centro de Madrid.","conocer","conoce","Conocer es regular fuera de yo: conoce."],
+["Tú ___ buenas ideas cuando trabajas en equipo.","traer","traes","Traer: tú → traes; la irregularidad fuerte es yo traigo."],
+["Yo ___ temprano de casa los lunes.","salir","salgo","Salir tiene yo irregular: salgo."],
+["Ellos ___ la tarea antes de cenar.","hacer","hacen","Hacer: ellos → hacen; la irregularidad es yo hago."]],
+presentProgressive:[
+["Ahora mismo, yo ___ un correo a mi profesora.","escribir","estoy escribiendo","Presente progresivo: estoy + escribiendo."],
+["Los niños ___ en el parque en este momento.","correr","están corriendo","Ellos → están corriendo."],
+["María ___ la cena mientras hablamos.","preparar","está preparando","Ella → está preparando."],
+["Nosotros ___ una película en español.","ver","estamos viendo","Nosotros → estamos viendo."],
+["¿Qué ___ tú ahora?","hacer","estás haciendo","Tú → estás haciendo."],
+["El bebé ___ porque está cansado.","dormir","está durmiendo","Dormir → durmiendo."],
+["Los estudiantes ___ ayuda al profesor.","pedir","están pidiendo","Pedir → pidiendo."],
+["Yo ___ lo que dice la guía.","oír","estoy oyendo","Oír → oyendo."],
+["Ella ___ una novela muy interesante.","leer","está leyendo","Leer → leyendo."],
+["Nosotros ___ hacia el centro de la ciudad.","ir","estamos yendo","Ir tiene gerundio irregular: yendo."]],
+preterite:[
+["Ayer, yo ___ una carta a mi abuela.","escribir","escribí","Acción terminada ayer: escribí."],
+["Ellos ___ tapas en un restaurante anoche.","comer","comieron","Comer regular: ellos → comieron."],
+["La semana pasada, nosotros ___ un museo de arte.","visitar","visitamos","Nosotros → visitamos."],
+["El sábado, Ana ___ al mercado temprano.","ir","fue","Ir en pretérito: ella → fue."],
+["Yo ___ la tarea antes de salir.","hacer","hice","Hacer usa hic-; yo → hice."],
+["Tú ___ una buena idea durante la reunión.","tener","tuviste","Tener usa tuv-: tuviste."],
+["El profesor nos ___ la respuesta al final.","decir","dijo","Decir usa dij-: dijo."],
+["Yo no ___ abrir la puerta porque perdí la llave.","poder","pude","Poder usa pud-: pude."],
+["Ellos ___ muy tarde de la fiesta.","venir","vinieron","Venir usa vin-: vinieron."],
+["Marta ___ las llaves sobre la mesa.","poner","puso","Poner usa pus-: puso."],
+["Los estudiantes ___ sus proyectos al salón.","traer","trajeron","Traer usa traj- y ellos termina en -eron: trajeron."],
+["Yo ___ la respuesta en ese momento.","saber","supe","Saber usa sup-: supe."],
+["La camarera nos ___ dos vasos de agua.","dar","dio","Dar es irregular: dio, sin tilde."],
+["Mi hermano ___ su teléfono en el autobús.","perder","perdió","Perder es regular en pretérito: perdió."],
+["Ellas ___ la película completa.","ver","vieron","Ver: ellos/ellas → vieron."]],
+imperfect:[
+["Cuando era niña, Ana ___ con sus primos todos los veranos.","jugar","jugaba","Hábito repetido en la infancia: jugaba."],
+["Mis abuelos ___ en un pueblo pequeño.","vivir","vivían","Descripción/hábito pasado: vivían."],
+["Nosotros siempre ___ juntos después de clase.","estudiar","estudiábamos","Acción habitual: estudiábamos."],
+["Yo ___ diez años cuando nos mudamos.","tener","tenía","La edad en el pasado usa imperfecto: tenía."],
+["Eran las ocho y ___ mucho frío.","hacer","hacía","Clima pasado: hacía."],
+["De pequeños, ellos ___ al parque cada domingo.","ir","iban","Ir es irregular: iban."],
+["Mi profesora ___ muy paciente con nosotros.","ser","era","Ser es irregular: era."],
+["Desde la ventana, yo ___ las montañas.","ver","veía","Ver es irregular: veía."],
+["Tú ___ música mientras hacías la tarea.","escuchar","escuchabas","Acción de fondo: escuchabas."],
+["La ciudad ___ más tranquila en aquella época.","parecer","parecía","Descripción de una situación pasada: parecía."]],
+pastProgressive:[
+["A las ocho, yo ___ la cena.","preparar","estaba preparando","Imperfecto de estar + gerundio."],
+["Cuando llamaste, nosotros ___ una película.","ver","estábamos viendo","Nosotros → estábamos viendo."],
+["Los niños ___ en el patio cuando empezó a llover.","jugar","estaban jugando","Acción en progreso interrumpida."],
+["Tú ___ cuando sonó la alarma.","dormir","estabas durmiendo","Dormir → durmiendo."],
+["El profesor ___ las instrucciones mientras entrábamos.","explicar","estaba explicando","Él → estaba explicando."],
+["Ellas ___ ayuda cuando llegó la directora.","pedir","estaban pidiendo","Pedir → pidiendo."],
+["Yo ___ un mensaje cuando se apagó el teléfono.","leer","estaba leyendo","Leer → leyendo."],
+["Vosotros ___ hacia la estación a esa hora.","caminar","estabais caminando","Vosotros → estabais caminando."]],
+future:[
+["Mañana yo ___ el proyecto.","terminar","terminaré","Futuro regular: infinitivo + é."],
+["El próximo año, nosotros ___ a España.","viajar","viajaremos","Nosotros → viajaremos."],
+["¿Tú ___ tiempo para ayudarme esta tarde?","tener","tendrás","Tener usa tendr-."],
+["Mis amigos ___ a la fiesta después del partido.","venir","vendrán","Venir usa vendr-."],
+["La profesora nos ___ los resultados mañana.","decir","dirá","Decir usa dir-."],
+["Yo ___ la cena cuando llegue a casa.","hacer","haré","Hacer usa har-."],
+["Ustedes ___ elegir entre dos opciones.","poder","podrán","Poder usa podr-."],
+["Nosotros ___ las sillas afuera si hace buen tiempo.","poner","pondremos","Poner usa pondr-."],
+["Ella ___ temprano para evitar el tráfico.","salir","saldrá","Salir usa saldr-."],
+["Algún día, tú ___ por qué tomamos esta decisión.","saber","sabrás","Saber usa sabr-."],
+["Ellos ___ quedarse más tiempo.","querer","querrán","Querer usa querr-."],
+["¿Dónde ___ las llaves? No las encuentro.","estar","estarán","El futuro puede expresar conjetura: ¿Dónde estarán?"]],
+conditional:[
+["Yo ___ más si tuviera más tiempo.","viajar","viajaría","Condicional regular: viajaría."],
+["Nosotros ___ la casa si fuera más barata.","comprar","compraríamos","Situación hipotética: compraríamos."],
+["¿Tú ___ ayudarme con este problema?","poder","podrías","Petición cortés; poder usa podr-."],
+["Ella ___ la verdad si la supiera.","decir","diría","Decir usa dir-."],
+["Mis padres ___ con nosotros, pero tienen que trabajar.","venir","vendrían","Venir usa vendr-."],
+["Yo ___ una fiesta si terminara temprano.","hacer","haría","Hacer usa har-."],
+["Ustedes ___ más éxito con una estrategia distinta.","tener","tendrían","Tener usa tendr-."],
+["Nosotros ___ las mesas afuera si no lloviera.","poner","pondríamos","Poner usa pondr-."],
+["Él ___ de casa más temprano para llegar a tiempo.","salir","saldría","Salir usa saldr-."],
+["Yo no ___ qué decir en esa situación.","saber","sabría","Saber usa sabr-."]],
+presentPerfect:[
+["Yo ya ___ la tarea.","terminar","he terminado","he + terminado."],
+["Nosotros ___ ese museo varias veces.","visitar","hemos visitado","hemos + visitado."],
+["Ella nunca ___ sushi.","probar","ha probado","ha + probado."],
+["¿Tú ___ la nueva película?","ver","has visto","Ver → visto."],
+["Yo ___ todo lo que necesitabas.","hacer","he hecho","Hacer → hecho."],
+["Nosotros ___ la mesa para la cena.","poner","hemos puesto","Poner → puesto."],
+["Ella ___ tres capítulos esta semana.","escribir","ha escrito","Escribir → escrito."],
+["Los niños ___ todos los regalos.","abrir","han abierto","Abrir → abierto."],
+["La tormenta ___ varias ramas.","romper","ha roto","Romper → roto."],
+["El equipo ___ al hotel muy tarde.","volver","ha vuelto","Volver → vuelto."]],
+pluperfect:[
+["Cuando llegamos, la película ya ___.","empezar","había empezado","Había empezado antes de nuestra llegada."],
+["Yo nunca ___ esa comida antes de viajar a Perú.","probar","había probado","Acción anterior al viaje."],
+["Ellos ya ___ cuando empezó a llover.","salir","habían salido","Habían salido antes de la lluvia."],
+["Nosotros ___ la reserva con anticipación.","hacer","habíamos hecho","Hacer → hecho."],
+["Tú ya ___ el libro cuando te lo recomendé.","leer","habías leído","Habías leído antes de la recomendación."],
+["La profesora ___ las notas antes de la reunión.","poner","había puesto","Poner → puesto."],
+["Los estudiantes nunca ___ una presentación tan larga.","dar","habían dado","Habían dado."],
+["Yo ___ la puerta, pero alguien la abrió después.","cerrar","había cerrado","Había cerrado antes de que alguien la abriera."]],
+futurePerfect:[
+["Para mañana, yo ___ el informe.","terminar","habré terminado","Futuro perfecto: habré + terminado."],
+["Para el viernes, nosotros ___ todas las pruebas.","corregir","habremos corregido","habremos + corregido."],
+["Cuando llegues, ellos ya ___.","salir","habrán salido","La salida ocurrirá antes de tu llegada."],
+["Para entonces, tú ___ suficiente dinero.","ahorrar","habrás ahorrado","habrás + ahorrado."],
+["En junio, ella ___ la carrera.","completar","habrá completado","habrá + completado."],
+["Para las ocho, yo ___ la cena.","hacer","habré hecho","Hacer → hecho."],
+["Dentro de una hora, ustedes ___ todos los documentos.","firmar","habrán firmado","habrán + firmado."],
+["Para el próximo mes, él ___ el libro.","escribir","habrá escrito","Escribir → escrito."]],
+conditionalPerfect:[
+["Yo ___ más temprano si hubiera sabido del tráfico.","salir","habría salido","Condicional perfecto: habría salido."],
+["Nosotros ___ el viaje si hubiéramos tenido dinero.","hacer","habríamos hecho","Hacer → hecho."],
+["Ella ___ contigo, pero estaba enferma.","venir","habría venido","habría + venido."],
+["¿Tú ___ otra decisión con más información?","tomar","habrías tomado","habrías + tomado."],
+["Ellos ___ el problema si hubieran leído las instrucciones.","resolver","habrían resuelto","Resolver → resuelto."],
+["Yo te ___ antes, pero perdí tu número.","llamar","habría llamado","habría + llamado."],
+["Ustedes ___ la puerta si hubieran oído el ruido.","abrir","habrían abierto","Abrir → abierto."],
+["Nosotras ___ la verdad si nos lo hubieran preguntado.","decir","habríamos dicho","Decir → dicho."]],
+presentSubjunctive:[
+["Quiero que tú ___ más agua.","beber","bebas","Deseo + que + sujeto diferente → subjuntivo."],
+["Es importante que nosotros ___ a tiempo.","llegar","lleguemos","Expresión impersonal + subjuntivo; g→gu."],
+["Dudo que ellos ___ la respuesta.","saber","sepan","Duda + subjuntivo; saber → sepa."],
+["Me alegra que ella ___ con nosotros.","venir","venga","Emoción + subjuntivo; venir → venga."],
+["El profesor recomienda que yo ___ más.","estudiar","estudie","Recomendación + subjuntivo."],
+["No creo que tú ___ razón.","tener","tengas","Negación de opinión + subjuntivo."],
+["Ojalá nosotros ___ buen tiempo mañana.","tener","tengamos","Ojalá introduce subjuntivo."],
+["Busco un libro que ___ ejemplos claros.","tener","tenga","Antecedente no específico → subjuntivo."],
+["Es posible que ellos ___ tarde.","llegar","lleguen","Posibilidad + subjuntivo."],
+["Prefiero que ustedes ___ aquí.","estar","estén","Preferencia + subjuntivo; estar → esté."],
+["Mi madre insiste en que yo ___ la verdad.","decir","diga","Decir → digo → diga."],
+["No hay nadie que ___ hacerlo mejor.","poder","pueda","Antecedente inexistente → subjuntivo; o→ue."],
+["Espero que tú ___ bien en el examen.","hacer","hagas","Hacer → hago → haga."],
+["Es necesario que vosotros ___ atención.","prestar","prestéis","Vosotros de -ar en subjuntivo termina en -éis."]],
+presentPerfectSubjunctive:[
+["Me alegra que tú ___ el examen.","aprobar","hayas aprobado","haya + participio; tú → hayas aprobado."],
+["Dudo que ellos ___ todo el trabajo.","terminar","hayan terminado","Duda + acción ya completada."],
+["Es posible que ella ___ las llaves en casa.","dejar","haya dejado","Posibilidad + acción anterior."],
+["No creo que nosotros ___ ese error.","cometer","hayamos cometido","No creo que + acción completada."],
+["Espero que ustedes ___ la información.","recibir","hayan recibido","Esperanza + acción ya realizada."],
+["Me sorprende que él ___ eso.","decir","haya dicho","Decir → dicho."],
+["Es bueno que vosotros ___ la decisión juntos.","tomar","hayáis tomado","Vosotros → hayáis tomado."],
+["No parece que yo ___ nada incorrecto.","hacer","haya hecho","Hacer → hecho."]],
+imperfectSubjunctive:[
+["Quería que tú ___ conmigo.","venir","vinieras","Vinieron → viniera."],
+["Era importante que nosotros ___ temprano.","llegar","llegáramos","Llegaron → llegara; nosotros lleva acento."],
+["Dudaba que ellos ___ la verdad.","saber","supieran","Supieron → supiera."],
+["Mi madre prefería que yo ___ en casa.","quedarse","me quedara","Verbo reflexivo: me quedara."],
+["El profesor recomendó que ustedes ___ más.","leer","leyeran","Leyeron → leyera."],
+["Buscábamos a alguien que ___ hablar japonés.","poder","pudiera","Pudieron → pudiera."],
+["Si yo ___ más tiempo, aprendería otro idioma.","tener","tuviera","Si + hipótesis → imperfecto de subjuntivo."],
+["Ojalá ___ más cerca.","vivir","vivieras","Deseo poco realista → imperfecto de subjuntivo."],
+["No creía que ella ___ hacerlo sola.","querer","quisiera","Quisieron → quisiera."],
+["Era raro que él no ___ nada.","decir","dijera","Dijeron → dijera."]],
+pastPerfectSubjunctive:[
+["Si yo ___ antes, habría ido contigo.","saber","hubiera sabido","Si + hubiera sabido → resultado con condicional perfecto."],
+["Ojalá ellos ___ a tiempo.","llegar","hubieran llegado","Deseo sobre un pasado ya cerrado."],
+["Me sorprendió que tú no ___ el mensaje.","ver","hubieras visto","Acción anterior a una reacción pasada."],
+["Era posible que nosotros ___ un error.","cometer","hubiéramos cometido","hubiéramos + cometido."],
+["Si ella ___ la verdad, no habría aceptado.","conocer","hubiera conocido","Condición pasada contraria a los hechos."],
+["Dudaba que ustedes ___ todo.","entender","hubieran entendido","Duda pasada sobre una acción anterior."],
+["Me alegró que vosotros ___ venir.","poder","hubierais podido","Vosotros → hubierais podido."],
+["Si él ___ las instrucciones, no se habría equivocado.","leer","hubiera leído","Condición pasada no realizada."]],
+affirmativeTu:[
+["___ la verdad, por favor.","decir","di","Irregular: decir → di."],
+["___ la tarea antes de salir.","hacer","haz","Irregular: hacer → haz."],
+["___ al supermercado y compra leche.","ir","ve","Irregular: ir → ve."],
+["___ los libros sobre la mesa.","poner","pon","Irregular: poner → pon."],
+["___ de casa ahora para no llegar tarde.","salir","sal","Irregular: salir → sal."],
+["___ paciente con tu hermano.","ser","sé","Irregular: ser → sé."],
+["___ cuidado al cruzar la calle.","tener","ten","Irregular: tener → ten."],
+["___ conmigo al concierto.","venir","ven","Irregular: venir → ven."],
+["___ la ventana, por favor.","abrir","abre","Regular: forma de él/ella → abre."],
+["___ tu nombre aquí.","escribir","escribe","Regular: escribe."]],
+negativeTu:[
+["No ___ tan rápido.","hablar","hables","No + subjuntivo de tú: no hables."],
+["No ___ eso ahora.","hacer","hagas","Hacer → haga → hagas."],
+["No ___ sin mí.","ir","vayas","Ir → vayas."],
+["No ___ las llaves en la mesa.","poner","pongas","Poner → ponga → pongas."],
+["No ___ tarde otra vez.","llegar","llegues","Llegar cambia g→gu."],
+["No ___ miedo.","tener","tengas","Tener → tenga → tengas."],
+["No ___ la respuesta todavía.","decir","digas","Decir → diga → digas."],
+["No ___ aquí.","venir","vengas","Venir → venga → vengas."],
+["No ___ ese vaso; está roto.","tocar","toques","Tocar cambia c→qu."],
+["No ___ impaciente.","ser","seas","Ser → seas."]],
+udUds:[
+["Señor, ___ aquí, por favor.","firmar","firme","Usted: firme."],
+["Profesora, ___ la pregunta otra vez.","repetir","repita","Usted: repita; e→i."],
+["Señores, ___ por esta puerta.","salir","salgan","Ustedes: salgan."],
+["Chicos, ___ sus teléfonos en las mochilas.","poner","pongan","Ustedes: pongan."],
+["Señora, no ___ esa medicina sin comer.","tomar","tome","Negativo de usted: no tome."],
+["Estudiantes, no ___ durante el examen.","hablar","hablen","Negativo de ustedes: no hablen."],
+["Doctor, ___ la verdad, por favor.","decir","diga","Usted: diga."],
+["Señoras, ___ conmigo.","venir","vengan","Ustedes: vengan."],
+["Señor Gómez, ___ cuidado con el escalón.","tener","tenga","Usted: tenga."],
+["Todos ustedes, ___ la actividad antes de salir.","hacer","hagan","Ustedes: hagan."]],
+vosotros:[
+["___ la página veinte.","abrir","abrid","Afirmativo vosotros: abrid."],
+["___ más despacio, por favor.","hablar","hablad","Hablar → hablad."],
+["___ la cena antes de salir.","comer","comed","Comer → comed."],
+["___ vuestros nombres aquí.","escribir","escribid","Escribir → escribid."],
+["___ temprano mañana.","venir","venid","Venir → venid."],
+["___ atención a las instrucciones.","prestar","prestad","Prestar → prestad."],
+["No ___ tan rápido.","correr","corráis","Negativo: subjuntivo de vosotros → corráis."],
+["No ___ sin avisarme.","salir","salgáis","Salir → salgáis."],
+["No ___ eso todavía.","hacer","hagáis","Hacer → hagáis."],
+["No ___ nerviosos.","estar","estéis","Estar → estéis."]]
+};
+
+const PRON=["yo","tú","él / ella / Ud.","nosotros/as","vosotros/as","ellos / ellas / Uds."];
+const PRES={
+"ser":["soy","eres","es","somos","sois","son"],"ir":["voy","vas","va","vamos","vais","van"],"estar":["estoy","estás","está","estamos","estáis","están"],"dar":["doy","das","da","damos","dais","dan"],"ver":["veo","ves","ve","vemos","veis","ven"],"tener":["tengo","tienes","tiene","tenemos","tenéis","tienen"],"venir":["vengo","vienes","viene","venimos","venís","vienen"],"decir":["digo","dices","dice","decimos","decís","dicen"],"hacer":["hago","haces","hace","hacemos","hacéis","hacen"],"poner":["pongo","pones","pone","ponemos","ponéis","ponen"],"salir":["salgo","sales","sale","salimos","salís","salen"],"saber":["sé","sabes","sabe","sabemos","sabéis","saben"],"conocer":["conozco","conoces","conoce","conocemos","conocéis","conocen"],"traer":["traigo","traes","trae","traemos","traéis","traen"],"oír":["oigo","oyes","oye","oímos","oís","oyen"],"poder":["puedo","puedes","puede","podemos","podéis","pueden"],"querer":["quiero","quieres","quiere","queremos","queréis","quieren"],"dormir":["duermo","duermes","duerme","dormimos","dormís","duermen"],"pedir":["pido","pides","pide","pedimos","pedís","piden"],"repetir":["repito","repites","repite","repetimos","repetís","repiten"],"servir":["sirvo","sirves","sirve","servimos","servís","sirven"],"preferir":["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"],"pensar":["pienso","piensas","piensa","pensamos","pensáis","piensan"],"empezar":["empiezo","empiezas","empieza","empezamos","empezáis","empiezan"],"cerrar":["cierro","cierras","cierra","cerramos","cerráis","cierran"],"jugar":["juego","juegas","juega","jugamos","jugáis","juegan"],"parecer":["parezco","pareces","parece","parecemos","parecéis","parecen"]};
+const PRET={
+"ser":["fui","fuiste","fue","fuimos","fuisteis","fueron"],"ir":["fui","fuiste","fue","fuimos","fuisteis","fueron"],"tener":["tuve","tuviste","tuvo","tuvimos","tuvisteis","tuvieron"],"estar":["estuve","estuviste","estuvo","estuvimos","estuvisteis","estuvieron"],"poder":["pude","pudiste","pudo","pudimos","pudisteis","pudieron"],"poner":["puse","pusiste","puso","pusimos","pusisteis","pusieron"],"saber":["supe","supiste","supo","supimos","supisteis","supieron"],"querer":["quise","quisiste","quiso","quisimos","quisisteis","quisieron"],"venir":["vine","viniste","vino","vinimos","vinisteis","vinieron"],"hacer":["hice","hiciste","hizo","hicimos","hicisteis","hicieron"],"decir":["dije","dijiste","dijo","dijimos","dijisteis","dijeron"],"traer":["traje","trajiste","trajo","trajimos","trajisteis","trajeron"],"dar":["di","diste","dio","dimos","disteis","dieron"],"ver":["vi","viste","vio","vimos","visteis","vieron"]};
+const IMP={"ser":["era","eras","era","éramos","erais","eran"],"ir":["iba","ibas","iba","íbamos","ibais","iban"],"ver":["veía","veías","veía","veíamos","veíais","veían"]};
+const FUTST={"tener":"tendr","venir":"vendr","decir":"dir","hacer":"har","poder":"podr","poner":"pondr","salir":"saldr","saber":"sabr","querer":"querr","caber":"cabr","haber":"habr"};
+const PP={"abrir":"abierto","cubrir":"cubierto","decir":"dicho","escribir":"escrito","hacer":"hecho","morir":"muerto","poner":"puesto","resolver":"resuelto","romper":"roto","ver":"visto","volver":"vuelto"};
+const GER={"ir":"yendo","leer":"leyendo","oír":"oyendo","traer":"trayendo","decir":"diciendo","dormir":"durmiendo","pedir":"pidiendo","repetir":"repitiendo","servir":"sirviendo","venir":"viniendo"};
+const SUBJ={
+"ser":["sea","seas","sea","seamos","seáis","sean"],"ir":["vaya","vayas","vaya","vayamos","vayáis","vayan"],"estar":["esté","estés","esté","estemos","estéis","estén"],"dar":["dé","des","dé","demos","deis","den"],"saber":["sepa","sepas","sepa","sepamos","sepáis","sepan"],"haber":["haya","hayas","haya","hayamos","hayáis","hayan"],"tener":["tenga","tengas","tenga","tengamos","tengáis","tengan"],"venir":["venga","vengas","venga","vengamos","vengáis","vengan"],"decir":["diga","digas","diga","digamos","digáis","digan"],"hacer":["haga","hagas","haga","hagamos","hagáis","hagan"],"poner":["ponga","pongas","ponga","pongamos","pongáis","pongan"],"salir":["salga","salgas","salga","salgamos","salgáis","salgan"],"conocer":["conozca","conozcas","conozca","conozcamos","conozcáis","conozcan"],"traer":["traiga","traigas","traiga","traigamos","traigáis","traigan"],"oír":["oiga","oigas","oiga","oigamos","oigáis","oigan"],"poder":["pueda","puedas","pueda","podamos","podáis","puedan"],"querer":["quiera","quieras","quiera","queramos","queráis","quieran"],"dormir":["duerma","duermas","duerma","durmamos","durmáis","duerman"],"pedir":["pida","pidas","pida","pidamos","pidáis","pidan"],"repetir":["repita","repitas","repita","repitamos","repitáis","repitan"],"servir":["sirva","sirvas","sirva","sirvamos","sirváis","sirvan"],"preferir":["prefiera","prefieras","prefiera","prefiramos","prefiráis","prefieran"],"jugar":["juegue","juegues","juegue","juguemos","juguéis","jueguen"],"empezar":["empiece","empieces","empiece","empecemos","empecéis","empiecen"],"cerrar":["cierre","cierres","cierre","cerremos","cerréis","cierren"]};
+const HP=["he","has","ha","hemos","habéis","han"],HI=["había","habías","había","habíamos","habíais","habían"],HF=["habré","habrás","habrá","habremos","habréis","habrán"],HC=["habría","habrías","habría","habríamos","habríais","habrían"],HS=["haya","hayas","haya","hayamos","hayáis","hayan"],HIS=["hubiera","hubieras","hubiera","hubiéramos","hubierais","hubieran"],EP=["estoy","estás","está","estamos","estáis","están"],EI=["estaba","estabas","estaba","estábamos","estabais","estaban"];
+function refl(v){return v.endsWith("se")?{v:v.slice(0,-2),r:true}:{v:v,r:false}}
+function addRef(f,r){if(!r)return f;const p=["me","te","se","nos","os","se"];return f.map((x,i)=>p[i]+" "+x)}
+function regPres(v){let s=v.slice(0,-2),e=v.slice(-2);return e==="ar"?[s+"o",s+"as",s+"a",s+"amos",s+"áis",s+"an"]:e==="er"?[s+"o",s+"es",s+"e",s+"emos",s+"éis",s+"en"]:[s+"o",s+"es",s+"e",s+"imos",s+"ís",s+"en"]}
+function presF(v){let r=refl(v),f=PRES[r.v]?[...PRES[r.v]]:regPres(r.v);return addRef(f,r.r)}
+function pretF(v){let r=refl(v),b=r.v,f;if(PRET[b])f=[...PRET[b]];else{let s=b.slice(0,-2),e=b.slice(-2);f=e==="ar"?[s+"é",s+"aste",s+"ó",s+"amos",s+"asteis",s+"aron"]:[s+"í",s+"iste",s+"ió",s+"imos",s+"isteis",s+"ieron"];if(b.endsWith("car"))f[0]=b.slice(0,-3)+"qué";if(b.endsWith("gar"))f[0]=b.slice(0,-3)+"gué";if(b.endsWith("zar"))f[0]=b.slice(0,-3)+"cé";if(["leer","oír"].includes(b)){f[2]=s+"yó";f[5]=s+"yeron";}}return addRef(f,r.r)}
+function impF(v){let r=refl(v),b=r.v,f;if(IMP[b])f=[...IMP[b]];else{let s=b.slice(0,-2);f=b.endsWith("ar")?[s+"aba",s+"abas",s+"aba",s+"ábamos",s+"abais",s+"aban"]:[s+"ía",s+"ías",s+"ía",s+"íamos",s+"íais",s+"ían"]}return addRef(f,r.r)}
+function futF(v){let b=refl(v).v,s=FUTST[b]||b;return ["é","ás","á","emos","éis","án"].map(e=>s+e)}
+function condF(v){let b=refl(v).v,s=FUTST[b]||b;return ["ía","ías","ía","íamos","íais","ían"].map(e=>s+e)}
+function part(v){v=refl(v).v;if(PP[v])return PP[v];return v.slice(0,-2)+(v.endsWith("ar")?"ado":"ido")}
+function ger(v){v=refl(v).v;if(GER[v])return GER[v];return v.slice(0,-2)+(v.endsWith("ar")?"ando":"iendo")}
+function subjF(v){let r=refl(v),b=r.v,f;if(SUBJ[b])f=[...SUBJ[b]];else{let yo=presF(b)[0],s=yo.endsWith("o")?yo.slice(0,-1):yo,e=b.endsWith("ar")?["e","es","e","emos","éis","en"]:["a","as","a","amos","áis","an"];f=e.map(x=>s+x);if(b.endsWith("car"))f=f.map(x=>x.replace("ce","que"));if(b.endsWith("gar"))f=f.map(x=>x.replace("ge","gue"));if(b.endsWith("zar"))f=f.map(x=>x.replace("ze","ce"));}return addRef(f,r.r)}
+function impSubjF(v){let r=refl(v),base=pretF(r.v)[5].replace(/ron$/,""),f=[base+"ra",base+"ras",base+"ra",base+"ramos",base+"rais",base+"ran"];let x=f[3],p=x.length-6,a={"a":"á","e":"é","i":"í","o":"ó","u":"ú"};if(p>=0&&a[x[p]])f[3]=x.slice(0,p)+a[x[p]]+x.slice(p+1);return addRef(f,r.r)}
+function comp(aux,v){let p=part(v);return aux.map(a=>a+" "+p)}
+function prog(aux,v){let g=ger(v);return aux.map(a=>a+" "+g)}
+function fullRows(v,t){let f=null;if(t==="present")f=presF(v);else if(t==="presentProgressive")f=prog(EP,v);else if(t==="preterite")f=pretF(v);else if(t==="imperfect")f=impF(v);else if(t==="pastProgressive")f=prog(EI,v);else if(t==="future")f=futF(v);else if(t==="conditional")f=condF(v);else if(t==="presentPerfect")f=comp(HP,v);else if(t==="pluperfect")f=comp(HI,v);else if(t==="futurePerfect")f=comp(HF,v);else if(t==="conditionalPerfect")f=comp(HC,v);else if(t==="presentSubjunctive")f=subjF(v);else if(t==="presentPerfectSubjunctive")f=comp(HS,v);else if(t==="imperfectSubjunctive")f=impSubjF(v);else if(t==="pastPerfectSubjunctive")f=comp(HIS,v);if(f)return PRON.map((p,i)=>[p,f[i]]);let b=refl(v).v,s=subjF(b);if(t==="affirmativeTu"){let irr={"decir":"di","hacer":"haz","ir":"ve","poner":"pon","salir":"sal","ser":"sé","tener":"ten","venir":"ven"};return [["tú",irr[b]||presF(b)[2]]]}if(t==="negativeTu")return [["tú","no "+s[1]]];if(t==="udUds")return [["Ud.",s[2]],["Uds.",s[5]]];if(t==="vosotros")return [["vosotros/as — afirmativo",b.slice(0,-1)+"d"],["vosotros/as — negativo","no "+s[4]]];return []}
+function fullConjHTML(v,t){let rows=fullRows(v,t);return '<div class="conjTitle">'+v+' — '+labels[t]+'</div><table class="conjTable"><tbody>'+rows.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>').join("")+'</tbody></table>'}
+
+let active="present",current=null,lastIndex=-1,attempts=0,correct=0,qNumber=0;
+function buildSidebar(){const list=document.getElementById("tenseList");groups.forEach(([g,keys])=>{const lab=document.createElement("div");lab.className="groupLabel";lab.textContent=g;list.appendChild(lab);keys.forEach(k=>{const b=document.createElement("button");b.className="tenseBtn"+(k===active?" active":"");b.dataset.key=k;b.textContent=labels[k];b.onclick=()=>selectTense(k);list.appendChild(b)})})}
+function selectTense(k){active=k;qNumber=0;lastIndex=-1;document.querySelectorAll(".tenseBtn").forEach(b=>b.classList.toggle("active",b.dataset.key===k));document.getElementById("modePill").textContent=labels[k];document.getElementById("tenseTitle").textContent=labels[k];newQuestion();if(window.innerWidth<950)window.scrollTo({top:document.querySelector(".main").offsetTop,behavior:"smooth"})}
+function newQuestion(){const arr=Q[active];let i;do{i=Math.floor(Math.random()*arr.length)}while(i===lastIndex&&arr.length>1);lastIndex=i;current=arr[i];qNumber++;const parts=current[0].split("___"),box=document.getElementById("sentence");box.innerHTML="";box.appendChild(document.createTextNode(parts[0]));const input=document.createElement("input");input.className="inlineAnswer";input.id="answerInput";input.type="text";input.autocomplete="off";input.spellcheck=false;input.placeholder="...";input.addEventListener("keydown",e=>{if(e.key==="Enter")checkAnswer()});box.appendChild(input);if(parts[1]!==undefined)box.appendChild(document.createTextNode(parts.slice(1).join("___")));document.getElementById("verbHint").textContent="Verbo: "+current[1];document.getElementById("feedback").className="feedback";document.getElementById("feedback").textContent="";document.getElementById("review").className="review";document.getElementById("questionCounter").textContent="Pregunta "+qNumber;document.getElementById("fullConjugation").innerHTML="";setTimeout(()=>input.focus(),50)}
+function normalize(s){return s.trim().toLowerCase().replace(/\s+/g," ")}function stripAccents(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function showReview(){document.getElementById("itemNote").textContent=current[3];document.getElementById("tenseNote").innerHTML=tenseNotes[active];document.getElementById("fullConjugation").innerHTML=fullConjHTML(current[1],active);document.getElementById("review").className="review show"}
+function checkAnswer(){const input=normalize(document.getElementById("answerInput").value);if(!input)return;const ans=normalize(current[2]);attempts++;document.getElementById("attemptCount").textContent=attempts;const fb=document.getElementById("feedback");if(input===ans){correct++;document.getElementById("correctCount").textContent=correct;fb.className="feedback good";fb.textContent="✓ ¡Correcto! "+current[2];showReview()}else if(stripAccents(input)===stripAccents(ans)){fb.className="feedback near";fb.textContent="Casi. La forma es correcta, pero revisa el acento: "+current[2];showReview()}else{fb.className="feedback bad";fb.textContent="Todavía no. Revisa el sujeto, la raíz y la terminación. Puedes intentarlo otra vez o mostrar la respuesta."}}
+function revealAnswer(){const fb=document.getElementById("feedback");fb.className="feedback good";fb.textContent="Respuesta: "+current[2];showReview()}
+buildSidebar();selectTense("present");
+</script>
+
+<script>
+document.addEventListener("keydown", function(event) {
+  const el=document.activeElement;
+  const isTyping=el&&(el.tagName==="INPUT"||el.tagName==="TEXTAREA"||el.isContentEditable);
+  const reviewVisible=document.getElementById("review") && document.getElementById("review").classList.contains("show");
+  if(event.code==="Space" && (reviewVisible || !isTyping)){
+    event.preventDefault();
+    if(typeof newQuestion==="function")newQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
